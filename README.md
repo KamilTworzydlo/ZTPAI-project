@@ -1,23 +1,40 @@
-# ZTPAI-project
+# ZTPAI-project — Wypożyczalnia szalunków i rusztowań
 
-Stworzenie strony opierającej się na informacjach na temat wypożyczalni, kontaktu oraz technologii jaką wykorzystuje.  
-Strona będzie zawierać **cennik**, **formularz kontaktu** oraz możliwość **sprawdzenia przybliżonej ceny wynajmu** w zależności od wprowadzonych danych.
+Projekt demo: prosta strona z ofertą oraz REST API do prezentacji produktów.
 
----
+## Wybrane technologie
+- Backend: **Java + Spring Boot**
+- Frontend: **Vue 3 + Vite**
 
-## Projekt
+## Struktura projektu
+```
+backend/  - aplikacja Spring Boot (port 8080)
+frontend/ - aplikacja Vue (Vite) (port 5173)
+```
 
-### Technologie
+## Uruchomienie lokalne
 
-- **Backend:** Java, Spring Boot  
-- **Frontend:** Vue  
-*(Możliwe dodanie w przyszłości dodatkowych narzędzi w zależności od zapotrzebowania.)*
+### Backend
+```
+cd backend
+mvn spring-boot:run
+```
+API dostępne pod: `http://localhost:8080/api/products`
 
----
+Przykłady:
+- Lista produktów: `curl http://localhost:8080/api/products`
+- Produkt o id 1: `curl http://localhost:8080/api/products/1`
+- Zły format id (400): `curl http://localhost:8080/api/products/abc`
 
-### Dlaczego taki wybór?
+### Frontend
+```
+cd frontend
+npm install
+npm run dev
+```
+Frontend domyślnie dostępny pod `http://localhost:5173`
 
-- **Spring Boot** zapewnia szybki i stabilny backend.  
-- **Vue** pozwala łatwo stworzyć przyjazny i responsywny frontend.  
-- Oba rozwiązania dobrze ze sobą współpracują, są popularne i łatwo znaleźć wsparcie, co przyspiesza pracę i redukuje stres przy integracjach.  
-- Dodatkowo, chciałem spróbować **Vue**, bo wcześniej nie miałem okazji samodzielnie go używać.
+## Commity (konwencja)
+- `feat(api): add endpoint for products`
+- `fix(routing): return 400 for invalid id param`
+- `docs: update README`
