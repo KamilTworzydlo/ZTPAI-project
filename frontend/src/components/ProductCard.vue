@@ -1,13 +1,87 @@
 <template>
-  <div style="background:#fff; padding:16px; border-radius:8px; width:320px; box-shadow:0 2px 6px rgba(0,0,0,0.06)">
-    <h3>{{ product.name }}</h3>
-    <p style="color:#444">{{ product.description }}</p>
-    <p style="font-weight:600">{{ product.pricePerDay }} PLN / dzień</p>
+  <div class="card">
+    <div class="card-image">
+      <!-- Placeholder pod przyszłe zdjęcie -->
+      <span>Zdjęcie produktu</span>
+    </div>
+
+    <div class="card-content">
+      <h3 class="card-title">{{ product.name }}</h3>
+      <p class="card-description">{{ product.description }}</p>
+
+      <div class="card-footer">
+        <span class="price">{{ product.pricePerDay }} zł / dzień</span>
+        <button class="btn btn-primary">Zapytaj</button>
+      </div>
+    </div>
   </div>
 </template>
 
-<script>
-export default {
-  props: { product: { type: Object, required: true } }
-}
+<script setup>
+defineProps({
+  product: {
+    type: Object,
+    required: true,
+  },
+});
 </script>
+
+<style scoped>
+.card {
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 35px rgba(0, 0, 0, 0.12);
+}
+
+/* IMAGE */
+.card-image {
+  background: #e5e7eb;
+  height: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #6b7280;
+  font-size: 0.9rem;
+}
+
+/* CONTENT */
+.card-content {
+  padding: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.card-title {
+  font-size: 1.05rem;
+  margin-bottom: 0.4rem;
+}
+
+.card-description {
+  font-size: 0.9rem;
+  color: #4b5563;
+  flex-grow: 1;
+}
+
+/* FOOTER */
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.price {
+  font-weight: bold;
+  color: #111827;
+}
+</style>
