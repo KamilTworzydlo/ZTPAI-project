@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="layout">
     <!-- HEADER -->
     <header class="header">
       <div class="logo">
@@ -12,10 +12,7 @@
         <a href="#" class="nav-link">Kalkulator wynajmu</a>
         <a href="#" class="nav-link">Logowanie</a>
 
-        <a
-          href="tel:+48600123456"
-          class="btn btn-primary"
-        >
+        <a href="tel:+48600123456" class="btn btn-primary">
           Zadzwoń teraz
         </a>
 
@@ -50,6 +47,13 @@
   font-family: Arial, Helvetica, sans-serif;
 }
 
+/* PAGE LAYOUT */
+.layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
 /* HEADER */
 .header {
   position: sticky;
@@ -64,14 +68,18 @@
 }
 
 .logo {
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   letter-spacing: 0.5px;
+  white-space: nowrap;
 }
 
+/* NAVIGATION */
 .nav {
   display: flex;
   align-items: center;
   gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: flex-end;
 }
 
 .nav-link {
@@ -91,6 +99,7 @@
   font-size: 0.9rem;
   text-decoration: none;
   font-weight: bold;
+  white-space: nowrap;
 }
 
 .btn-primary {
@@ -113,8 +122,8 @@
 
 /* CONTENT */
 .content {
+  flex: 1;
   padding: 2rem;
-  min-height: calc(100vh - 140px);
 }
 
 /* FOOTER */
@@ -128,9 +137,26 @@
 
 /* RESPONSIVE */
 @media (max-width: 900px) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
   .nav {
-    flex-wrap: wrap;
-    justify-content: flex-end;
+    width: 100%;
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 600px) {
+  .nav {
+    gap: 0.5rem;
+  }
+
+  .btn {
+    font-size: 0.85rem;
+    padding: 0.4rem 0.6rem;
   }
 }
 </style>
