@@ -7,23 +7,34 @@
       </div>
 
       <nav class="nav">
-        <a href="#" class="nav-link">Strona główna</a>
-        <a href="#" class="nav-link">Produkty</a>
-        <a href="#" class="nav-link">Kalkulator wynajmu</a>
-        <a href="#" class="nav-link">Logowanie</a>
+  <router-link to="/" class="nav-link">
+    Strona główna
+  </router-link>
 
-        <a href="tel:+48600123456" class="btn btn-primary">
-          Zadzwoń teraz
-        </a>
+  <router-link to="/products" class="nav-link">
+    Produkty
+  </router-link>
 
-        <a
-          href="https://www.facebook.com/profile.php?id=100064062483832"
-          target="_blank"
-          class="btn btn-secondary"
-        >
-          Facebook
-        </a>
-      </nav>
+  <router-link to="/calculator" class="nav-link">
+    Kalkulator wynajmu
+  </router-link>
+
+  <router-link to="/login" class="nav-link">
+    Logowanie
+  </router-link>
+
+  <a href="tel:+48600123456" class="btn btn-primary">
+    Zadzwoń teraz
+  </a>
+
+  <a
+    href="https://www.facebook.com/profile.php?id=100064062483832"
+    target="_blank"
+    class="btn btn-secondary"
+  >
+    Facebook
+  </a>
+</nav>
     </header>
 
     <!-- CONTENT -->

@@ -1,7 +1,10 @@
 <script setup>
 import { ref, onMounted } from "vue";
-import { fetchProducts } from "@/api/products";
-import ProductCard from "@/components/ProductCard.vue";
+import { fetchProducts } from "../api/products";
+import ProductCard from "../components/ProductCard.vue";
+
+
+
 
 const products = ref([]);
 const loading = ref(true);
