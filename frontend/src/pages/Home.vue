@@ -16,6 +16,16 @@ onMounted(async () => {
     loading.value = false;
   }
 });
+
+import InquiryModal from "../components/InquiryModal.vue";
+
+const selectedProduct = ref(null);
+const showModal = ref(false);
+
+function openInquiry(product) {
+  selectedProduct.value = product;
+  showModal.value = true;
+}
 </script>
 
 <template>
@@ -36,56 +46,49 @@ onMounted(async () => {
       w wynajmie systemów szalunkowych oraz rusztowań. Stawiamy na jakość,
       terminowość i przejrzyste warunki współpracy.
     </p>
-
-  <!-- WHY US -->
-<section class="why">
-  <h2>Dlaczego warto nas wybrać?</h2>
-
-  <div class="why-grid">
-    <div class="why-card">
-      <h3>Solidny sprzęt</h3>
-      <p>
-        Oferujemy sprawdzone i regularnie serwisowane systemy
-        szalunkowe oraz rusztowania.
-      </p>
-    </div>
-
-    <div class="why-card">
-      <h3>Szybka realizacja</h3>
-      <p>
-        Elastyczne terminy wynajmu oraz szybki odbiór i zwrot
-        sprzętu bez zbędnych formalności.
-      </p>
-    </div>
-
-    <div class="why-card">
-      <h3>Przejrzyste ceny</h3>
-      <p>
-        Jasne warunki współpracy, brak ukrytych kosztów
-        i czytelny cennik.
-      </p>
-    </div>
-  </div>
-</section>
-
   </section>
 
-<!-- GALLERY -->
-<section class="gallery">
-  <h2>Nasze realizacje</h2>
+  <!-- WHY US -->
+  <section class="why">
+    <h2>Dlaczego warto nas wybrać?</h2>
 
-  <div class="gallery-grid">
-    <div class="gallery-item">
-      <span>Szalunki ścienne</span>
+    <div class="why-grid">
+      <div class="why-card">
+        <h3>Solidny sprzęt</h3>
+        <p>
+          Oferujemy sprawdzone i regularnie serwisowane systemy
+          szalunkowe oraz rusztowania.
+        </p>
+      </div>
+
+      <div class="why-card">
+        <h3>Szybka realizacja</h3>
+        <p>
+          Elastyczne terminy wynajmu oraz szybki odbiór i zwrot
+          sprzętu bez zbędnych formalności.
+        </p>
+      </div>
+
+      <div class="why-card">
+        <h3>Przejrzyste ceny</h3>
+        <p>
+          Jasne warunki współpracy, brak ukrytych kosztów
+          i czytelny cennik.
+        </p>
+      </div>
     </div>
-    <div class="gallery-item">
-      <span>Rusztowania</span>
+  </section>
+
+  <!-- GALLERY -->
+  <section class="gallery">
+    <h2>Nasze realizacje</h2>
+
+    <div class="gallery-grid">
+      <div class="gallery-item">Szalunki ścienne</div>
+      <div class="gallery-item">Rusztowania</div>
+      <div class="gallery-item">Szalunki stropowe</div>
     </div>
-    <div class="gallery-item">
-      <span>Szalunki stropowe</span>
-    </div>
-  </div>
-</section>
+  </section>
 
   <!-- PRODUCTS -->
   <section class="products">
@@ -99,10 +102,19 @@ onMounted(async () => {
         v-for="product in products"
         :key="product.id"
         :product="product"
+        @inquire="openInquiry"
       />
     </div>
   </section>
+
+  <!-- INQUIRY MODAL -->
+  <InquiryModal
+    :visible="showModal"
+    :product="selectedProduct"
+    @close="showModal = false"
+  />
 </template>
+
 
 <style scoped>
 .hero {
