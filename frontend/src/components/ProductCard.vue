@@ -11,7 +11,9 @@
 
       <div class="card-footer">
         <span class="price">{{ product.pricePerDay }} zł / dzień</span>
-        <button class="btn btn-primary">Zapytaj</button>
+        <button class="btn btn-primary" @click="$emit('inquire', product)">
+            Zapytaj
+        </button>
       </div>
     </div>
   </div>
@@ -24,6 +26,8 @@ defineProps({
     required: true,
   },
 });
+
+defineEmits(["inquire"]);
 </script>
 
 <style scoped>
