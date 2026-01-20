@@ -11,7 +11,7 @@ onMounted(async () => {
   try {
     products.value = await fetchProducts();
   } catch (e) {
-    error.value = "Nie udało się pobrać oferty. Spróbuj ponownie później.";
+    error.value = "Nie udało się pobrać oferty.";
   } finally {
     loading.value = false;
   }
@@ -19,34 +19,33 @@ onMounted(async () => {
 </script>
 
 <template>
+  <!-- HERO -->
   <section class="hero">
     <h1>Wynajem szalunków i rusztowań</h1>
     <p>
-      Profesjonalny wynajem szalunków ściennych, stropowych oraz rusztowań
-      budowlanych. Szybko, solidnie i w dobrej cenie.
+      Profesjonalna wypożyczalnia szalunków ściennych, stropowych oraz rusztowań
+      budowlanych. Obsługujemy klientów indywidualnych i firmy.
     </p>
-
-    <div class="hero-actions">
-      <a href="tel:+48600123456" class="btn btn-primary">
-        Zadzwoń teraz
-      </a>
-      <a
-        href="https://www.facebook.com/profile.php?id=100064062483832"
-        target="_blank"
-        class="btn btn-secondary"
-      >
-        Facebook
-      </a>
-    </div>
   </section>
 
+  <!-- ABOUT -->
+  <section class="about">
+    <h2>Kim jesteśmy?</h2>
+    <p>
+      Tworzydło to lokalna wypożyczalnia sprzętu budowlanego, specjalizująca się
+      w wynajmie systemów szalunkowych oraz rusztowań. Stawiamy na jakość,
+      terminowość i przejrzyste warunki współpracy.
+    </p>
+  </section>
+
+  <!-- PRODUCTS -->
   <section class="products">
     <h2>Nasza oferta</h2>
 
-    <p v-if="loading" class="status">Ładowanie oferty...</p>
-    <p v-else-if="error" class="status error">{{ error }}</p>
+    <p v-if="loading">Ładowanie oferty...</p>
+    <p v-else-if="error">{{ error }}</p>
 
-    <div v-else class="products-grid">
+    <div v-else class="grid">
       <ProductCard
         v-for="product in products"
         :key="product.id"
@@ -65,55 +64,44 @@ onMounted(async () => {
 }
 
 .hero h1 {
-  font-size: 2.4rem;
+  font-size: 2.3rem;
   margin-bottom: 1rem;
 }
 
 .hero p {
   max-width: 720px;
-  margin: 0 auto 2rem;
-  font-size: 1.05rem;
-  line-height: 1.6;
+  margin: 0 auto;
   color: #e5e7eb;
 }
 
-.hero-actions {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-  flex-wrap: wrap;
+.about {
+  max-width: 900px;
+  margin: 4rem auto;
+  padding: 0 2rem;
+  text-align: center;
+}
+
+.about h2 {
+  margin-bottom: 1rem;
+}
+
+.about p {
+  color: #4b5563;
+  line-height: 1.6;
 }
 
 .products {
-  margin-top: 4rem;
+  padding: 2rem;
 }
 
 .products h2 {
   text-align: center;
-  font-size: 1.8rem;
   margin-bottom: 2rem;
 }
 
-.products-grid {
+.grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 2rem;
-}
-
-.status {
-  text-align: center;
-  font-weight: 500;
-  margin-top: 2rem;
-}
-
-.status.error {
-  color: #dc2626;
-}
-
-/* RESPONSIVE */
-@media (max-width: 768px) {
-  .hero h1 {
-    font-size: 1.9rem;
-  }
 }
 </style>
