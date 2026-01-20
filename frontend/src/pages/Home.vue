@@ -70,6 +70,23 @@ onMounted(async () => {
 
   </section>
 
+<!-- GALLERY -->
+<section class="gallery">
+  <h2>Nasze realizacje</h2>
+
+  <div class="gallery-grid">
+    <div class="gallery-item">
+      <span>Szalunki ścienne</span>
+    </div>
+    <div class="gallery-item">
+      <span>Rusztowania</span>
+    </div>
+    <div class="gallery-item">
+      <span>Szalunki stropowe</span>
+    </div>
+  </div>
+</section>
+
   <!-- PRODUCTS -->
   <section class="products">
     <h2>Nasza oferta</h2>
@@ -161,4 +178,33 @@ onMounted(async () => {
   border-radius: 8px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
 }
+
+.gallery {
+  padding: 4rem 2rem;
+  text-align: center;
+}
+
+.gallery h2 {
+  margin-bottom: 2rem;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 2rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.gallery-item {
+  background: #e5e7eb;
+  height: 180px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #374151;
+  font-weight: bold;
+}
+
 </style>
