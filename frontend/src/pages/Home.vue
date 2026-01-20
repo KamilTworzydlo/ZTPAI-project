@@ -36,6 +36,38 @@ onMounted(async () => {
       w wynajmie systemów szalunkowych oraz rusztowań. Stawiamy na jakość,
       terminowość i przejrzyste warunki współpracy.
     </p>
+
+  <!-- WHY US -->
+<section class="why">
+  <h2>Dlaczego warto nas wybrać?</h2>
+
+  <div class="why-grid">
+    <div class="why-card">
+      <h3>Solidny sprzęt</h3>
+      <p>
+        Oferujemy sprawdzone i regularnie serwisowane systemy
+        szalunkowe oraz rusztowania.
+      </p>
+    </div>
+
+    <div class="why-card">
+      <h3>Szybka realizacja</h3>
+      <p>
+        Elastyczne terminy wynajmu oraz szybki odbiór i zwrot
+        sprzętu bez zbędnych formalności.
+      </p>
+    </div>
+
+    <div class="why-card">
+      <h3>Przejrzyste ceny</h3>
+      <p>
+        Jasne warunki współpracy, brak ukrytych kosztów
+        i czytelny cennik.
+      </p>
+    </div>
+  </div>
+</section>
+
   </section>
 
   <!-- PRODUCTS -->
@@ -103,5 +135,30 @@ onMounted(async () => {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 2rem;
+}
+
+.why {
+  background: #f9fafb;
+  padding: 4rem 2rem;
+  text-align: center;
+}
+
+.why h2 {
+  margin-bottom: 2rem;
+}
+
+.why-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 2rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.why-card {
+  background: #ffffff;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
 }
 </style>
