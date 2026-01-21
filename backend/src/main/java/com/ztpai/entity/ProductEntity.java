@@ -1,7 +1,6 @@
 package com.ztpai.entity;
 
 import jakarta.persistence.*;
-import java.math.BigDecimal;
 
 @Entity
 @Table(name = "PRODUCT")
@@ -19,13 +18,16 @@ public class ProductEntity {
     private String description;
 
     @Column(name = "PRICE_PER_DAY", nullable = false)
-    private BigDecimal pricePerDay;
+    private Double pricePerDay;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "CATEGORY_ID", nullable = false)
     private CategoryEntity category;
 
-    public ProductEntity() {}
+    public ProductEntity() {
+    }
+
+    // ===== GETTERS & SETTERS =====
 
     public Integer getId() {
         return id;
@@ -51,11 +53,11 @@ public class ProductEntity {
         this.description = description;
     }
 
-    public BigDecimal getPricePerDay() {
+    public Double getPricePerDay() {
         return pricePerDay;
     }
 
-    public void setPricePerDay(BigDecimal pricePerDay) {
+    public void setPricePerDay(Double pricePerDay) {
         this.pricePerDay = pricePerDay;
     }
 

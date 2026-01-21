@@ -6,3 +6,4 @@ import com.ztpai.entity.CategoryEntity;
 public interface CategoryRepository
         extends JpaRepository<CategoryEntity, Integer> {
 }
+
