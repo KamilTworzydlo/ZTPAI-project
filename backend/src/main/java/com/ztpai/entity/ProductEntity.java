@@ -1,4 +1,4 @@
-package pl.tworzydlo.ztpai.entity;
+package com.ztpai.entity;
 
 import jakarta.persistence.*;
 import java.math.BigDecimal;
@@ -20,5 +20,9 @@ public class ProductEntity {
     @JoinColumn(name = "category_id")
     private CategoryEntity category;
 
-    // getters & setters
+    public Integer getId() { return id; }
+    public String getName() { return name; }
+    public String getDescription() { return description; }
+    public BigDecimal getPricePerDay() { return pricePerDay; }
+    public CategoryEntity getCategory() { return category; }
 }

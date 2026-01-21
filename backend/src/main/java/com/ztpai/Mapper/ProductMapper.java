@@ -1,7 +1,7 @@
-package pl.tworzydlo.ztpai.mapper;
+package com.ztpai.mapper;
 
-import pl.tworzydlo.ztpai.dto.ProductDto;
-import pl.tworzydlo.ztpai.entity.ProductEntity;
+import com.ztpai.dto.ProductDto;
+import com.ztpai.entity.ProductEntity;
 
 public class ProductMapper {
 

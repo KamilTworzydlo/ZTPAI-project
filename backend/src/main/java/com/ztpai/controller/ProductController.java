@@ -42,20 +42,26 @@ public class ProductController {
      * - 404 NOT FOUND – brak produktu
      * - 400 BAD REQUEST – błędny format ID
      */
-    @GetMapping("/{id}")
-    public ResponseEntity<?> getProductById(@PathVariable String id) {
-        try {
-            int productId = Integer.parseInt(id);
-            return productService.getProductById(productId)
-                    .map(ResponseEntity::ok)
-                    .orElseGet(() ->
-                            ResponseEntity.status(HttpStatus.NOT_FOUND)
-                                    .body(Map.of("error", "Product not found"))
-                    );
-        } catch (NumberFormatException e) {
-            return ResponseEntity
-                    .status(HttpStatus.BAD_REQUEST)
-                    .body(Map.of("error", "Bad request: id must be an integer"));
-        }
+@GetMapping("/{id}")
+public ResponseEntity<?> getProductById(@PathVariable String id) {
+    int productId;
+
+    try {
+        productId = Integer.parseInt(id);
+    } catch (NumberFormatException e) {
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .body(Map.of("error", "Bad request: id must be an integer"));
     }
+
+    var productOpt = productService.getProductById(productId);
+
+    if (productOpt.isEmpty()) {
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .body(Map.of("error", "Product not found"));
+    }
+
+    return ResponseEntity.ok(productOpt.get());
+}
 }

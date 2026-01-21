@@ -1,4 +1,4 @@
-package pl.tworzydlo.ztpai.dto;
+package com.ztpai.dto;
 
 import java.math.BigDecimal;
 

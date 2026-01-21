@@ -1,4 +1,4 @@
-package pl.tworzydlo.ztpai.entity;
+package com.ztpai.entity;
 
 import jakarta.persistence.*;
 
@@ -11,5 +11,6 @@ public class CategoryEntity {
 
     private String name;
 
-    // getters & setters
+    public Integer getId() { return id; }
+    public String getName() { return name; }
 }
