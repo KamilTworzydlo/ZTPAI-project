@@ -13,9 +13,7 @@ public class ProductMapper {
                 entity.getName(),
                 entity.getDescription(),
                 BigDecimal.valueOf(entity.getPricePerDay()),
-                entity.getCategory() != null
-                        ? entity.getCategory().getName()
-                        : null
+                entity.getCategory().getName()
         );
     }
 }

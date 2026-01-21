@@ -20,14 +20,12 @@ public class ProductEntity {
     @Column(name = "PRICE_PER_DAY", nullable = false)
     private Double pricePerDay;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "CATEGORY_ID", nullable = false)
     private CategoryEntity category;
 
     public ProductEntity() {
     }
-
-    // ===== GETTERS & SETTERS =====
 
     public Integer getId() {
         return id;
