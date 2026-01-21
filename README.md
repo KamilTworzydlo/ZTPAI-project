@@ -122,6 +122,21 @@ curl http://localhost:8080/api/products/abc
 - Frontend UI
 
 ---
+## Asynchroniczność
+Aplikacja wykorzystuje mechanizm asynchronicznego przetwarzania zadań przy użyciu
+adnotacji `@Async` w Spring Boot. Przykładowy endpoint:
+POST `/api/async-test`, który uruchamia zadanie w tle bez blokowania wątku HTTP.
+
+## Bezpieczeństwo
+Aplikacja wykorzystuje mechanizm uwierzytelniania oparty o JWT (JSON Web Token).
+Endpoint POST `/api/auth/login` generuje token JWT dla użytkownika, który następnie
+jest wymagany do uzyskania dostępu do zabezpieczonych endpointów REST,
+np. GET `/api/secure/test`.
+
+## Dokumentacja API
+Dokumentacja API dostępna jest poprzez Swagger UI:
+http://localhost:8080/swagger-ui/index.html  
+Swagger prezentuje wszystkie dostępne endpointy REST wraz z opisami oraz modelami danych.
 
 ## 🧩 Konwencja commitów
 
