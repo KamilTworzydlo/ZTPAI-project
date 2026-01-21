@@ -2,6 +2,9 @@
   <div>
     <h1>Products</h1>
 
+    <!-- FORMULARZ DODAWANIA PRODUKTU -->
+    <ProductForm @created="load" />
+
     <p v-if="loading">Loading products...</p>
     <p v-if="error" class="error">{{ error }}</p>
 
@@ -17,12 +20,14 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import { fetchProducts, deleteProduct } from '@/api/productsApi';
+import ProductForm from '@/components/ProductForm.vue';
 
 const products = ref([]);
 const loading = ref(true);
 const error = ref(null);
 
 async function load() {
+  loading.value = true;
   try {
     products.value = await fetchProducts();
   } catch (e) {
