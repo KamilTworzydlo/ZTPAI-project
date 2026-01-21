@@ -1,30 +1,31 @@
 package com.ztpai.entity;
 
 import jakarta.persistence.*;
+import java.math.BigDecimal;
 
 @Entity
 @Table(name = "PRODUCT")
 public class ProductEntity {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
     private Integer id;
 
-    @Column(name = "NAME")
+    @Column(name = "NAME", nullable = false)
     private String name;
 
     @Column(name = "DESCRIPTION")
     private String description;
 
-    @Column(name = "PRICE_PER_DAY")
-    private Double pricePerDay;
+    @Column(name = "PRICE_PER_DAY", nullable = false)
+    private BigDecimal pricePerDay;
 
     @ManyToOne
-    @JoinColumn(name = "CATEGORY_ID")
+    @JoinColumn(name = "CATEGORY_ID", nullable = false)
     private CategoryEntity category;
 
-    public ProductEntity() {
-    }
+    public ProductEntity() {}
 
     public Integer getId() {
         return id;
@@ -50,11 +51,11 @@ public class ProductEntity {
         this.description = description;
     }
 
-    public Double getPricePerDay() {
+    public BigDecimal getPricePerDay() {
         return pricePerDay;
     }
 
-    public void setPricePerDay(Double pricePerDay) {
+    public void setPricePerDay(BigDecimal pricePerDay) {
         this.pricePerDay = pricePerDay;
     }
 
