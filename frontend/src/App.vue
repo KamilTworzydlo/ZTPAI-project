@@ -7,34 +7,35 @@
       </div>
 
       <nav class="nav">
-  <router-link to="/" class="nav-link">
-    Strona główna
-  </router-link>
+        <router-link to="/" class="nav-link">
+          Strona główna
+        </router-link>
 
-  <router-link to="/products" class="nav-link">
-    Produkty
-  </router-link>
+        <router-link to="/products" class="nav-link">
+          Produkty
+        </router-link>
 
-  <router-link to="/calculator" class="nav-link">
-    Kalkulator wynajmu
-  </router-link>
+        <router-link to="/calculator" class="nav-link">
+          Kalkulator wynajmu
+        </router-link>
 
-  <router-link to="/login" class="nav-link">
-    Logowanie
-  </router-link>
+        <router-link to="/login" class="nav-link">
+          Logowanie
+        </router-link>
 
-  <a href="tel:+48600123456" class="btn btn-primary">
-    Zadzwoń teraz
-  </a>
+        <a href="tel:+48600123456" class="btn btn-primary">
+          Zadzwoń teraz
+        </a>
 
-  <a
-    href="https://www.facebook.com/profile.php?id=100064062483832"
-    target="_blank"
-    class="btn btn-secondary"
-  >
-    Facebook
-  </a>
-</nav>
+        <a
+          href="https://www.facebook.com/profile.php?id=100064062483832"
+          target="_blank"
+          rel="noopener"
+          class="btn btn-secondary"
+        >
+          Facebook
+        </a>
+      </nav>
     </header>
 
     <!-- CONTENT -->
@@ -49,8 +50,15 @@
   </div>
 </template>
 
+<script setup>
+// App.vue pełni wyłącznie rolę layoutu
+// Logika jest w komponentach widoków (router-view)
+</script>
+
 <style>
-/* RESET */
+/* =====================
+   RESET
+===================== */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -58,20 +66,24 @@
   font-family: Arial, Helvetica, sans-serif;
 }
 
-/* PAGE LAYOUT */
+/* =====================
+   PAGE LAYOUT
+===================== */
 .layout {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
 
-/* HEADER */
+/* =====================
+   HEADER
+===================== */
 .header {
   position: sticky;
   top: 0;
   z-index: 100;
   background: #1f2933;
-  color: #fff;
+  color: #ffffff;
   padding: 1rem 2rem;
   display: flex;
   justify-content: space-between;
@@ -84,7 +96,9 @@
   white-space: nowrap;
 }
 
-/* NAVIGATION */
+/* =====================
+   NAVIGATION
+===================== */
 .nav {
   display: flex;
   align-items: center;
@@ -103,7 +117,15 @@
   text-decoration: underline;
 }
 
-/* BUTTONS */
+/* ACTIVE ROUTE */
+.router-link-active {
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+/* =====================
+   BUTTONS
+===================== */
 .btn {
   padding: 0.45rem 0.8rem;
   border-radius: 4px;
@@ -115,7 +137,7 @@
 
 .btn-primary {
   background: #f59e0b;
-  color: #000;
+  color: #000000;
 }
 
 .btn-primary:hover {
@@ -124,20 +146,24 @@
 
 .btn-secondary {
   background: #1877f2;
-  color: #fff;
+  color: #ffffff;
 }
 
 .btn-secondary:hover {
   background: #0f5dc2;
 }
 
-/* CONTENT */
+/* =====================
+   CONTENT
+===================== */
 .content {
   flex: 1;
   padding: 2rem;
 }
 
-/* FOOTER */
+/* =====================
+   FOOTER
+===================== */
 .footer {
   background: #111827;
   color: #9ca3af;
@@ -146,7 +172,9 @@
   font-size: 0.85rem;
 }
 
-/* RESPONSIVE */
+/* =====================
+   RESPONSIVE
+===================== */
 @media (max-width: 900px) {
   .header {
     flex-direction: column;
