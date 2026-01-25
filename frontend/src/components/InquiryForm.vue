@@ -2,8 +2,7 @@
 import { ref } from "vue";
 
 const props = defineProps({
-  visible: Boolean,
-  product: Object,
+  product: Object
 });
 
 const emit = defineEmits(["close"]);
@@ -20,8 +19,8 @@ async function send() {
       name: name.value,
       email: email.value,
       message: message.value,
-      product: props.product.name,
-    }),
+      product: props.product.name
+    })
   });
 
   alert("Wysłano zapytanie!");
@@ -30,7 +29,7 @@ async function send() {
 </script>
 
 <template>
-  <div v-if="visible" class="modal">
+  <div class="modal">
     <div class="modal-box">
       <h2>Zapytanie o: {{ product.name }}</h2>
 
@@ -50,7 +49,7 @@ async function send() {
 .modal {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(0,0,0,.6);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -61,10 +60,9 @@ async function send() {
   border-radius: 8px;
   width: 400px;
 }
-input,
-textarea {
+input, textarea {
   width: 100%;
-  margin: 0.5rem 0;
+  margin: .5rem 0;
 }
 .actions {
   display: flex;

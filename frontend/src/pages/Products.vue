@@ -2,13 +2,24 @@
 import { ref, onMounted } from "vue";
 import { fetchProducts } from "../api/products";
 import ProductCard from "../components/ProductCard.vue";
-
-
-
+import InquiryModal from "../components/InquiryModal.vue";
 
 const products = ref([]);
 const loading = ref(true);
 const error = ref(null);
+
+const selectedProduct = ref(null);
+const showModal = ref(false);
+
+function openInquiryForm(product) {
+  selectedProduct.value = product;
+  showModal.value = true;
+}
+
+function closeModal() {
+  showModal.value = false;
+  selectedProduct.value = null;
+}
 
 onMounted(async () => {
   try {
@@ -36,8 +47,15 @@ onMounted(async () => {
         v-for="product in products"
         :key="product.id"
         :product="product"
+        @inquiry="openInquiryForm"
       />
     </div>
+
+    <InquiryModal
+      :visible="showModal"
+      :product="selectedProduct"
+      @close="closeModal"
+    />
   </section>
 </template>
 

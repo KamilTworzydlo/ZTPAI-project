@@ -1,7 +1,6 @@
 <template>
   <div class="card">
     <div class="card-image">
-      <!-- Placeholder pod przyszłe zdjęcie -->
       <span>Zdjęcie produktu</span>
     </div>
 
@@ -11,8 +10,8 @@
 
       <div class="card-footer">
         <span class="price">{{ product.pricePerDay }} zł / dzień</span>
-        <button class="btn btn-primary" @click="$emit('inquire', product)">
-            Zapytaj
+        <button class="btn btn-primary" @click="$emit('inquiry', product)">
+          Zapytaj
         </button>
       </div>
     </div>
@@ -27,7 +26,7 @@ defineProps({
   },
 });
 
-defineEmits(["inquire"]);
+defineEmits(["inquiry"]);
 </script>
 
 <style scoped>

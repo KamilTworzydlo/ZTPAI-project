@@ -102,7 +102,7 @@ function openInquiry(product) {
         v-for="product in products"
         :key="product.id"
         :product="product"
-        @inquire="openInquiry"
+        @inquiry="openInquiry"
       />
     </div>
   </section>

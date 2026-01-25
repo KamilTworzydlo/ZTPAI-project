@@ -22,4 +22,14 @@ public class JwtService {
                 .signWith(Keys.hmacShaKeyFor(SECRET.getBytes()))
                 .compact();
     }
+
+    // <<< TA METODA MUSI BYĆ W ŚRODKU KLASY >>>
+    public String extractUsername(String token) {
+        return Jwts.parserBuilder()
+            .setSigningKey(Keys.hmacShaKeyFor(SECRET.getBytes()))
+            .build()
+            .parseClaimsJws(token)
+            .getBody()
+            .getSubject();
+    }
 }
