@@ -1,27 +1,52 @@
 <script setup>
 import { ref } from "vue";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
 
 const email = ref("");
 const password = ref("");
 const error = ref(null);
+const loading = ref(false);
 
-function submit() {
+async function submit() {
   error.value = null;
+  loading.value = true;
 
   if (!email.value || !password.value) {
-    error.value = "Uzupełnij email oraz hasło.";
+    error.value = "Uzupełnij login oraz hasło.";
+    loading.value = false;
     return;
   }
 
-  // Mock logowania – backend niezaimplementowany
-  alert(
-    "Logowanie demo\n\nEmail: " +
-      email.value +
-      "\n(hasło nie jest wysyłane)"
-  );
+  try {
+    const res = await fetch("http://localhost:8080/api/auth/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        username: email.value,
+        password: password.value,
+      }),
+    });
 
-  email.value = "";
-  password.value = "";
+    if (!res.ok) {
+      throw new Error("Nieprawidłowe dane logowania");
+    }
+
+    const data = await res.json();
+
+    // zapis JWT
+    localStorage.setItem("token", data.token);
+    localStorage.setItem("username", data.username);
+
+    // przekierowanie po loginie
+    router.push("/products");
+
+  } catch (e) {
+    error.value = e.message;
+  } finally {
+    loading.value = false;
+  }
 }
 </script>
 
@@ -36,11 +61,11 @@ function submit() {
 
     <form @submit.prevent="submit" class="login-form">
       <label>
-        Email
+        Login
         <input
-          type="email"
+          type="text"
           v-model="email"
-          placeholder="adres@email.pl"
+          placeholder="admin"
         />
       </label>
 
@@ -49,19 +74,16 @@ function submit() {
         <input
           type="password"
           v-model="password"
-          placeholder="••••••••"
+          placeholder="admin"
         />
       </label>
 
       <p v-if="error" class="error">{{ error }}</p>
 
-      <button class="btn btn-primary">Zaloguj się</button>
+      <button class="btn btn-primary" :disabled="loading">
+        {{ loading ? "Logowanie..." : "Zaloguj się" }}
+      </button>
     </form>
-
-    <p class="hint">
-      * Logowanie demonstracyjne – funkcjonalność backendowa nie jest
-      zaimplementowana.
-    </p>
   </section>
 </template>
 
