@@ -1,154 +1,145 @@
-# ZTPAI-project — Rental Management Demo
+# ZTPAI-project --- Rental Management System
 
-Projekt demonstracyjny wypożyczalni szalunków i rusztowań z backendem REST API (Spring Boot) oraz frontendem SPA (Vue 3 + Vite).
-Celem projektu jest prezentacja CRUD, integracji frontend–backend oraz inicjalizacji bazy danych.
+Projekt demonstracyjny wypożyczalni szalunków i rusztowań z backendem
+REST API (Spring Boot) oraz frontendem SPA (Vue 3 + Vite).\
+Celem projektu jest prezentacja architektury warstwowej, CRUD,
+autentykacji JWT oraz integracji frontend--backend.
 
----
+------------------------------------------------------------------------
 
-## 🚀 Funkcjonalności
+## 📌 Project Overview
 
-### Backend (Spring Boot)
-- CRUD dla produktów
-- Walidacja parametrów (400 / 404)
-- Inicjalizacja danych (`data.sql`)
-- Dokumentacja API (Swagger)
+Aplikacja umożliwia: - przegląd oferty produktów (szalunki,
+rusztowania), - wysyłanie zapytań przez formularz kontaktowy, -
+logowanie użytkownika z wykorzystaniem JWT, - zarządzanie danymi przez
+REST API.
 
-### Frontend (Vue 3)
-- Lista produktów
-- Dodawanie produktu
-- Usuwanie produktu
-- Obsługa błędów
+Projekt jest aplikacją typu **end-to-end**.
 
----
+------------------------------------------------------------------------
 
-## 🛠 Technologie
-
-- Java 17
-- Spring Boot 3
-- Spring Data JPA
-- H2 Database
-- Vue 3
-- Vite
-- Swagger (springdoc-openapi)
-
----
-
-## 📁 Struktura projektu
-
-```
-ZTPAI-project/
-├── backend/     # Spring Boot REST API
-├── frontend/    # Vue 3 + Vite
-└── README.md
-```
-
----
-
-## ⚙️ Wymagania
-
-- Java 17+
-- Maven
-- Node.js + npm
-
----
-
-## ▶️ Uruchomienie
+## 🧱 Tech Stack
 
 ### Backend
 
-```bash
-cd backend
-mvn clean spring-boot:run
-```
-
-API:
-```
-http://localhost:8080
-```
-
-Swagger:
-```
-http://localhost:8080/swagger-ui.html
-```
-
----
+-   Java 17\
+-   Spring Boot 3\
+-   Spring Security + JWT\
+-   Spring Data JPA\
+-   H2 (in-memory database)\
+-   Swagger / OpenAPI
 
 ### Frontend
 
-```bash
+-   Vue 3 (Composition API)\
+-   Vite\
+-   Fetch API\
+-   HTML / CSS (custom UI)
+
+------------------------------------------------------------------------
+
+## 🚀 Features
+
+### Backend
+
+-   CRUD produktów (`/api/products`)
+-   Logowanie (`/api/auth/login`)
+-   JWT
+-   Formularz kontaktowy (`/api/contact`)
+-   Endpoint asynchroniczny (`/api/async-test`)
+-   Swagger
+
+### Frontend
+
+-   Home
+-   Produkty
+-   Modal zapytania
+-   Login JWT
+-   Integracja z backendem
+
+------------------------------------------------------------------------
+
+## 🔐 Authentication (JWT)
+
+POST /api/auth/login
+
+``` json
+{
+  "username": "admin",
+  "password": "admin"
+}
+```
+
+Response:
+
+``` json
+{
+  "username": "admin",
+  "token": "JWT_TOKEN"
+}
+```
+
+------------------------------------------------------------------------
+
+## 📄 API Documentation
+
+http://localhost:8080/swagger-ui/index.html
+
+------------------------------------------------------------------------
+
+## 🗄️ Database
+
+H2 in-memory.\
+Plik inicjalizujący:
+
+backend/src/main/resources/data.sql
+
+30 produktów testowych.
+
+H2 console: http://localhost:8080/h2\
+jdbc:h2:mem:testdb
+
+------------------------------------------------------------------------
+
+## ▶️ How to run
+
+### Backend
+
+``` bash
+cd backend
+mvn spring-boot:run
+```
+
+### Frontend
+
+``` bash
 cd frontend
 npm install
 npm run dev
 ```
 
-Frontend:
-```
-http://localhost:5173
-```
+------------------------------------------------------------------------
 
----
+## 🧩 Architecture
 
-## 📌 Przykłady API
+controller -\> service -\> repository -\> model -\> dto
 
-Pobranie listy produktów:
-```bash
-curl http://localhost:8080/api/products
-```
+------------------------------------------------------------------------
 
-Pobranie produktu:
-```bash
-curl http://localhost:8080/api/products/1
-```
+## 🧪 Evaluation checklist
 
-Błędny parametr:
-```bash
-curl http://localhost:8080/api/products/abc
-```
+-   [x] README
+-   [x] 30 rekordów w bazie
+-   [x] CRUD
+-   [x] JWT
+-   [x] Formularz kontaktowy
+-   [x] Frontend + backend
+-   [x] Swagger
+-   [x] UI/UX
+-   [x] Git
 
----
+------------------------------------------------------------------------
 
-## 🗃 Baza danych
+## 👤 Author
 
-- H2 (in-memory)
-- Dane inicjalne w `data.sql`
-- Kategorie i produkty ładowane przy starcie aplikacji
-
----
-
-## 🧪 Testowanie
-
-- Swagger UI
-- curl / Postman
-- Frontend UI
-
----
-## Asynchroniczność
-Aplikacja wykorzystuje mechanizm asynchronicznego przetwarzania zadań przy użyciu
-adnotacji `@Async` w Spring Boot. Przykładowy endpoint:
-POST `/api/async-test`, który uruchamia zadanie w tle bez blokowania wątku HTTP.
-
-## Bezpieczeństwo
-Aplikacja wykorzystuje mechanizm uwierzytelniania oparty o JWT (JSON Web Token).
-Endpoint POST `/api/auth/login` generuje token JWT dla użytkownika, który następnie
-jest wymagany do uzyskania dostępu do zabezpieczonych endpointów REST,
-np. GET `/api/secure/test`.
-
-## Dokumentacja API
-Dokumentacja API dostępna jest poprzez Swagger UI:
-http://localhost:8080/swagger-ui/index.html  
-Swagger prezentuje wszystkie dostępne endpointy REST wraz z opisami oraz modelami danych.
-
-## 🧩 Konwencja commitów
-
-Projekt stosuje **Conventional Commits**:
-
-```
-feat(api): add product CRUD endpoints
-fix(db): align entities with data.sql
-fix(api): handle invalid id parameter
-docs(readme): update project documentation
-```
-
----
-
-
+Kamil Tworzydło
