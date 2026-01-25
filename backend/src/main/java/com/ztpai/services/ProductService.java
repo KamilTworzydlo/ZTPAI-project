@@ -7,6 +7,7 @@ import com.ztpai.entity.ProductEntity;
 import com.ztpai.mapper.ProductMapper;
 import com.ztpai.repository.CategoryRepository;
 import com.ztpai.repository.ProductRepository;
+import com.ztpai.exception.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -40,6 +41,7 @@ public class ProductService {
 
     // ======================
     // GET BY ID
+    // (tu już masz poprawnie – Optional + 404 w kontrolerze)
     // ======================
     public Optional<ProductDto> getProductById(int id) {
         return productRepository.findById(id)
@@ -53,13 +55,13 @@ public class ProductService {
 
         CategoryEntity category = categoryRepository.findById(dto.categoryId())
                 .orElseThrow(() ->
-                        new IllegalArgumentException("Category not found: " + dto.categoryId())
+                        new ResourceNotFoundException("Category not found: " + dto.categoryId())
                 );
 
         ProductEntity entity = new ProductEntity();
         entity.setName(dto.name());
         entity.setDescription(dto.description());
-        entity.setPricePerDay(dto.pricePerDay().doubleValue()); // 🔴 KONWERSJA
+        entity.setPricePerDay(dto.pricePerDay().doubleValue());
         entity.setCategory(category);
 
         return ProductMapper.toDto(productRepository.save(entity));
@@ -72,17 +74,17 @@ public class ProductService {
 
         ProductEntity entity = productRepository.findById(id)
                 .orElseThrow(() ->
-                        new IllegalArgumentException("Product not found: " + id)
+                        new ResourceNotFoundException("Product not found: " + id)
                 );
 
         CategoryEntity category = categoryRepository.findById(dto.categoryId())
                 .orElseThrow(() ->
-                        new IllegalArgumentException("Category not found: " + dto.categoryId())
+                        new ResourceNotFoundException("Category not found: " + dto.categoryId())
                 );
 
         entity.setName(dto.name());
         entity.setDescription(dto.description());
-        entity.setPricePerDay(dto.pricePerDay().doubleValue()); // 🔴 KONWERSJA
+        entity.setPricePerDay(dto.pricePerDay().doubleValue());
         entity.setCategory(category);
 
         return ProductMapper.toDto(productRepository.save(entity));
@@ -92,9 +94,11 @@ public class ProductService {
     // DELETE
     // ======================
     public void deleteProduct(int id) {
-        if (!productRepository.existsById(id)) {
-            throw new IllegalArgumentException("Product not found: " + id);
-        }
-        productRepository.deleteById(id);
+        ProductEntity entity = productRepository.findById(id)
+                .orElseThrow(() ->
+                        new ResourceNotFoundException("Product not found: " + id)
+                );
+
+        productRepository.delete(entity);
     }
 }
