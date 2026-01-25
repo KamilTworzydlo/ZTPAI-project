@@ -14,7 +14,8 @@ rusztowania), - wysyłanie zapytań przez formularz kontaktowy, -
 logowanie użytkownika z wykorzystaniem JWT, - zarządzanie danymi przez
 REST API.
 
-Projekt jest aplikacją typu **end-to-end**.
+Projekt jest aplikacją typu **end-to-end**: frontend komunikuje się
+bezpośrednio z backendem poprzez HTTP (JSON).
 
 ------------------------------------------------------------------------
 
@@ -44,24 +45,28 @@ Projekt jest aplikacją typu **end-to-end**.
 
 -   CRUD produktów (`/api/products`)
 -   Logowanie (`/api/auth/login`)
--   JWT
+-   Autoryzacja JWT
 -   Formularz kontaktowy (`/api/contact`)
 -   Endpoint asynchroniczny (`/api/async-test`)
--   Swagger
+-   Dokumentacja API (Swagger)
 
 ### Frontend
 
--   Home
--   Produkty
+-   Strona główna z ofertą
+-   Widok listy produktów
 -   Modal zapytania
--   Login JWT
+-   Strona logowania (JWT)
 -   Integracja z backendem
 
 ------------------------------------------------------------------------
 
 ## 🔐 Authentication (JWT)
 
-POST /api/auth/login
+Endpoint:
+
+    POST /api/auth/login
+
+Body:
 
 ``` json
 {
@@ -79,25 +84,38 @@ Response:
 }
 ```
 
+Token JWT jest zapisywany w `localStorage` i wykorzystywany do
+autoryzacji zapytań do chronionych endpointów.
+
 ------------------------------------------------------------------------
 
 ## 📄 API Documentation
 
-http://localhost:8080/swagger-ui/index.html
+Swagger dostępny pod:
+
+    http://localhost:8080/swagger-ui/index.html
+
+Pozwala testować wszystkie endpointy: - products - auth - contact -
+async-test - secure-test
 
 ------------------------------------------------------------------------
 
 ## 🗄️ Database
 
-H2 in-memory.\
-Plik inicjalizujący:
+Projekt wykorzystuje bazę danych **H2 (in-memory)**.
 
-backend/src/main/resources/data.sql
+Dane inicjalizowane są przez:
 
-30 produktów testowych.
+    backend/src/main/resources/data.sql
 
-H2 console: http://localhost:8080/h2\
-jdbc:h2:mem:testdb
+Zawiera: - 3 kategorie - 6 klientów - 30 produktów testowych
+
+H2 console:
+
+    http://localhost:8080/h2
+    JDBC URL: jdbc:h2:mem:testdb
+    User: sa
+    Password: (puste)
 
 ------------------------------------------------------------------------
 
@@ -110,6 +128,10 @@ cd backend
 mvn spring-boot:run
 ```
 
+Backend:
+
+    http://localhost:8080
+
 ### Frontend
 
 ``` bash
@@ -118,28 +140,105 @@ npm install
 npm run dev
 ```
 
+Frontend:
+
+    http://localhost:5173
+
 ------------------------------------------------------------------------
 
 ## 🧩 Architecture
 
-controller -\> service -\> repository -\> model -\> dto
+Architektura warstwowa:
+
+controller → service → repository → model → dto
+
+Każda warstwa odpowiada za inny poziom odpowiedzialności: - controller:
+HTTP - service: logika biznesowa - repository: baza danych
 
 ------------------------------------------------------------------------
 
-## 🧪 Evaluation checklist
+## 🧪 Evaluation checklist (kryteria ewaluacji)
 
--   [x] README
--   [x] 30 rekordów w bazie
--   [x] CRUD
--   [x] JWT
--   [x] Formularz kontaktowy
--   [x] Frontend + backend
--   [x] Swagger
--   [x] UI/UX
--   [x] Git
+Projekt spełnia następujące kryteria:
+
+### 1. README i uruchomienie
+
+-   [x] Jasny opis projektu\
+-   [x] Instrukcja backend\
+-   [x] Instrukcja frontend
+
+### 2. Architektura / ERD
+
+-   [x] Architektura warstwowa\
+-   [x] Min. 5 tabel (Product, Category, Customer, User, Contact)
+
+### 3. Baza danych
+
+-   [x] 3NF\
+-   [x] Min. 30 rekordów testowych
+
+### 4. Repozytorium Git
+
+-   [x] Conventional Commits\
+-   [x] Czytelna historia\
+-   [x] \>40 commitów
+
+### 5. Implementacja funkcji
+
+-   [x] CRUD produktów\
+-   [x] Formularz kontaktowy\
+-   [x] JWT\
+-   [x] Frontend--backend
+
+### 6. Dobór technologii
+
+-   [x] Nowoczesny stack\
+-   [x] Opisany w README
+
+### 7. Architektura kodu
+
+-   [x] Warstwy logiczne\
+-   [x] Brak logiki w kontrolerach
+
+### 8. UX / UI
+
+-   [x] Responsywność\
+-   [x] Własne komponenty\
+-   [x] Spójny design
+
+### 9. Uwierzytelnianie i autoryzacja
+
+-   [x] JWT\
+-   [x] Token w frontend\
+-   [x] Ochrona endpointów
+
+### 10. API
+
+-   [x] REST\
+-   [x] Poprawne statusy HTTP
+
+### 11. Frontend--API
+
+-   [x] Realna integracja\
+-   [x] Loading / error
+
+### 12. Jakość kodu
+
+-   [x] Brak duplikacji\
+-   [x] Czytelne nazwy
+
+### 13. Asynchroniczność
+
+-   [x] `/api/async-test`
+
+### 14. Dokumentacja API
+
+-   [x] Swagger\
+-   [x] Aktualna dokumentacja
 
 ------------------------------------------------------------------------
 
 ## 👤 Author
 
-Kamil Tworzydło
+Kamil Tworzydło\
+Projekt wykonany w ramach zajęć z ZTPAI.
